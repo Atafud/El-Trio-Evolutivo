@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import random
 
 class AG_MaximizarUnos:
-    def __init__(self, tam_pob=50, long_crom=100, generaciones=100, pc=0.7, pm=0.01, elites=2):
+    def __init__(self, tam_pob=100, long_crom=100, generaciones=100, pc=0.7, pm=0.01, elites=2):
         self.tam_pob = tam_pob
         self.long_crom = long_crom
         self.generaciones = generaciones
@@ -13,12 +13,17 @@ class AG_MaximizarUnos:
         self.elites = elites
         self.historial = {'media': [], 'mejor': [], 'peor': []}
     
+    # Crea una matriz aleatoria de 0s y 1s (poblacion*genes)
     def generar_poblacion(self):
         return np.random.randint(0, 2, (self.tam_pob, self.long_crom))
     
+    # Calcular cuantos 1s tiene un cromosoma
     def aptitud(self, cromosoma):
         return np.sum(cromosoma)
     
+    # Suma todas las aptitudes
+    # Calcula probabilidad de cada individuo: 
+    # Elige aleatoriamente según esas probabilidades
     def seleccion_ruleta(self, poblacion, aptitudes):
         total = aptitudes.sum()
         prob = aptitudes / total
@@ -95,30 +100,22 @@ class AG_MaximizarUnos:
 
 # ========== USO ==========
 
-print("="*50)
 print("1. SIN CROSSOVER NI MUTACIÓN")
-print("="*50)
 ag1 = AG_MaximizarUnos(pc=0, pm=0)
 ag1.ejecutar()
 ag1.graficar()
 
-print("\n" + "="*50)
-print("2. SOLO MUTACIÓN (pm=1)")
-print("="*50)
+print("\n\n2. SOLO MUTACIÓN (pm=1)")
 ag2 = AG_MaximizarUnos(pc=0, pm=1)
 ag2.ejecutar()
 ag2.graficar()
 
-print("\n" + "="*50)
-print("3. SOLO CROSSOVER (pc=1)")
-print("="*50)
+print("\n\n3. SOLO CROSSOVER (pc=1)")
 ag3 = AG_MaximizarUnos(pc=1, pm=0)
 ag3.ejecutar()
 ag3.graficar()
 
-print("\n" + "="*50)
-print("4. CROSSOVER + MUTACIÓN (COMPLETO)")
-print("="*50)
+print("\n\n4. CROSSOVER + MUTACIÓN")
 ag4 = AG_MaximizarUnos(pc=0.7, pm=0.01)
 ag4.ejecutar()
 ag4.graficar()
