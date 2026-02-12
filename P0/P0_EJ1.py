@@ -55,12 +55,10 @@ class AG_Maximizar3s:
             
             nueva_pob = []
             
-            # Elitismo
             mejores_idx = np.argsort(aptitudes)[-self.elites:]
             for idx in mejores_idx:
                 nueva_pob.append(poblacion[idx].copy())
             
-            # Resto
             while len(nueva_pob) < self.tam_pob:
                 p1 = self.seleccion_ruleta(poblacion, aptitudes)
                 p2 = self.seleccion_ruleta(poblacion, aptitudes)
@@ -89,7 +87,6 @@ class AG_Maximizar3s:
         plt.show()
 
 
-# USO
 print("EJERCICIO 1: Maximizar 3s")
 print("Alfabeto: 0-9, Longitud: 20")
 print("Óptimo: [3,3,3,3,...,3,3] = 20 treses")
