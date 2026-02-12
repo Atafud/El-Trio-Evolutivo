@@ -24,7 +24,6 @@ class AG_Subcadenas25:
         return contador
     
     def seleccion_ruleta(self, poblacion, aptitudes):
-        # Si todas las aptitudes son 0, selección aleatoria
         if aptitudes.sum() == 0:
             idx = np.random.randint(0, len(poblacion))
             return poblacion[idx].copy()
@@ -63,12 +62,10 @@ class AG_Subcadenas25:
             
             nueva_pob = []
             
-            # Elitismo
             mejores_idx = np.argsort(aptitudes)[-self.elites:]
             for idx in mejores_idx:
                 nueva_pob.append(poblacion[idx].copy())
             
-            # Resto
             while len(nueva_pob) < self.tam_pob:
                 p1 = self.seleccion_ruleta(poblacion, aptitudes)
                 p2 = self.seleccion_ruleta(poblacion, aptitudes)
@@ -98,7 +95,6 @@ class AG_Subcadenas25:
         plt.show()
 
 
-# USO
 print("EJERCICIO 2: Maximizar subcadenas '25'")
 print("Alfabeto: 0-9, Longitud: 15")
 print("Óptimo: [2,5,2,5,2,5,2,5,2,5,2,5,2,5,2] = 7 subcadenas")
@@ -107,7 +103,6 @@ ag = AG_Subcadenas25()
 mejor, aptitud = ag.ejecutar()
 print(f"\nResultado: {mejor}")
 
-# Mostrar las subcadenas encontradas
 print("\nSubcadenas '25' encontradas:")
 for i in range(len(mejor) - 1):
     if mejor[i] == 2 and mejor[i + 1] == 5:
